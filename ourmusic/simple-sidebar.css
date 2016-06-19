@@ -1,0 +1,186 @@
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Toggle Styles */
+
+@font-face {
+    font-family: 'bebas';
+    src: url('../fonts/bebas.ttf');
+}
+
+@font-face {
+    font-family: 'district';
+    src: url('../fonts/district.otf');
+}
+
+@font-face {
+    font-family: 'lobster';
+    src: url('../fonts/lobster.otf');
+}
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    font-family: 'district', sans-serif;
+    padding:100px;
+    font-weight: 300px;
+    text-align: center;
+    min-width:400px;
+}
+
+#page-content-wrapper h1{
+    font-family: 'bebas', sans-serif;
+    letter-spacing: 5px;
+    font-size: 30px;
+}
+
+#page-content-wrapper #header{
+    text-align: left;
+}
+
+#page-content-wrapper i{
+    padding-right:15px;
+    padding-bottom:15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+#header {
+    opacity:50%;
+    height: 70px;
+    border-radius: 10px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    margin: 0;
+    list-style: none;
+    background-color: coral;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 15px;
+    padding-left: 20px;
+    font-family: 'bebas',sans-serif;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: white;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    font-size: 30px;
+    line-height: 40px;
+    padding-top: 20px;
+    color: white;
+    font-family: 'bebas',sans-serif;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: white;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: white;
+    background: none;
+}
+
+
+
+/* was at 768*/
+@media(min-width:0px) {
+
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+    
+}
+
+footer {
+    position: absolute;
+    clear: both;
+    float: bottom;
+    font-family: 'district';
+    text-align: center;
+}

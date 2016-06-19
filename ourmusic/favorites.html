@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <title>OURS | KEV + SYL</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+
+                <li class="sidebar-brand">
+
+                    <a href="#">
+                        KEV + SYL
+                    </a>
+               
+                </li>
+
+                <li>
+                    <a href="../ourmusic/dash.html"><img src="../ourmusic/img/home.png" width="70px"></a>
+                </li>
+                <li>
+                    <a href="../ourmusic/music.html"><img src="../ourmusic/img/music.png" width="70px"></a>
+                </li>
+                <li>
+                    <a href="../ourmusic/favorites.html"><img src="../ourmusic/img/heart.png" width="70px"></a>
+                </li>
+                <li>
+                    <a href="../ourmusic/photos.html"><img src="../ourmusic/img/camera.png" width="70px"></a>
+                </li>
+                <li>
+                    <a href="../ourmusic/chat.html"><img src="../ourmusic/img/chat.png" width="70px"></a>
+                </li>
+                <div class="sidebar_footer">
+                <a href="#"><i class="fa fa-user"></i></a>
+                <a href="#"><i class="fa fa-wrench"></i></a>
+                <a href="../ourmusic/home.html"><i class="fa fa-info-circle"></i></a>
+                </div>
+            </ul>
+
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="header">
+                            <img href="#menu-toggle" id="menu-toggle" src="https://cdn1.iconfinder.com/data/icons/ui-icons-2/512/collapse-menu-01-256.png"
+                            style="opacity:0.4;filter:alpha(opacity=40);"
+                            height="42">
+                            </img>
+                            <h2>Our Favorites</h2>
+                        </div>
+                       
+
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+
+    function httpGetAsync(theUrl, callback) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() { 
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                callback(xmlHttp.responseText);
+        }
+        xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+        xmlHttp.send(null);
+    }
+
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+    SC.initialize({
+        client_id: 'a382417ac4426fd509246a0b6fb3885f',
+    });
+
+    SC.stream('/tracks/199568328').then(function(player){
+        player.play();
+    });
+
+    $("#song-search").keyup(function(event){
+        if(event.keyCode == 13){
+            $("#search-button").click();
+        }
+    });
+
+    $("#search-button").click(function(e) {
+        var query = $("#song-search").val();
+        SC.get('/tracks', {
+            q: query
+        }).then(function(tracks) {
+            // console.log(tracks[0].title);
+            window.currentSongList = tracks;
+            $("#song-list").empty();
+            for (i = 0; i < tracks.length; i++) {
+                console.log(tracks[i].title);
+                $("#song-list").append("<li>" + tracks[i].title + "</li>");
+            }
+            // $(tracks).each(function(track) {
+            //     console.log(track.title);
+            // });
+        });
+    });
+
+    $('#song-list').on('click', 'li', function() {
+        var projIndex = $(this).index();
+        console.log(projIndex);
+        console.log(window.currentSongList[projIndex].id)
+        var songID = window.currentSongList[projIndex].id;
+        SC.stream('/tracks/' + songID.toString()).then(function(player){
+            player.play();
+        });
+    });
+
+    </script>
+
+</body>
+<footer>
+
+</footer>
+</html>
